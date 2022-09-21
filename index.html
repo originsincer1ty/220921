@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="서울과학기술대학교 웹인터페이스디자인2 2주차 과제입니다.">
+    <meta name="author" content="Seong Kim">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="reset.css">
+	
+	<style type="text/css">
+
+
+		html {
+			text-align: center;
+			font-size: 16px;
+		}
+
+		h1 {
+			margin-top: 3rem;
+			font-size: 2rem;
+		}
+
+		h2 {margin: 0; width: 30vw; height: 30vh;}
+		section {
+			padding: 3rem;
+		}
+		#container {display: flex;}
+		.one-third {width: 33.3%; height: 50vh}
+		.colornum {font-size: 5rem; color: white;}
+		#econ {width: 3rem; height: 3rem;}
+
+		.shiftani  {width: 90vw; height: 5vh;
+				background: url(econ.png);
+				background-size : 5vh auto;
+				animation: shift 0.2s infinite linear;
+				}
+		#right {transform: rotateY(180deg);}
+		@keyframes shift{
+			from{background-position: 0 0;}
+			to{background-position: -5vh 0;}
+		}
+		#animate {
+			margin: 0; display: flex;
+		}
+		#control{ margin: auto; margin-top: 30px;}
+
+		.box{ width: 100px; height: 100px; position: absolute; left: 100px; top: 100px; background: url(econ_small.png); }
+
+		p {
+			font-size: 2rem;
+		}
+
+		footer {
+			padding: 3rem;
+		}
+
+	</style>
+	
+	<title></title>
+
+</head>
+<body>
+	<h1>
+		e-con everywhere
+	</h1>
+
+	<section>
+		<div id="animate">
+			<div id="left" class="shiftani">
+			</div>
+			<div id="right" class="shiftani">
+			</div>
+		</div>
+		<input type="range" id="control" step="0.1" min="0.1" max="4" value="2">
+		<input type="range" id="control3d" step="1" min="0" max="360" value="0">
+	</section>
+
+	<section>
+		<div id ="container">
+			<div class="one-third" id="w1">
+				<input type="color" id="c1">
+
+				<div class="colornum" id="m1"></div>
+			</div>
+			<div class="one-third" id="w2">
+				<input type="color" id="c2">
+				<div class="colornum" id="m2"></div>
+			</div>
+			<div class="one-third" id="w3">
+				<input type="color" id="c3">
+				<div class="colornum" id="m3"></div> 
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<div class="copyright">
+			2022 서울과학기술대학교 디자인학부 김성은
+		</div>
+	</footer>
+
+	<script type="text/javascript">
+
+
+		c1.oninput = function(){
+			w1.style.background = c1.value;
+			 m1.innerHTML = c1.value;
+		}
+		c2.oninput = function(){
+			w2.style.background = c2.value;
+			 m2.innerHTML = c2.value;
+		}
+		c3.oninput = function(){
+			w3.style.background = c3.value;
+			 m3.innerHTML = c3.value;
+		}
+
+		control.oninput = function(){
+			left.style.animationDuration = control.value + "s";
+			right.style.animationDuration = control.value + "s";
+		}
+
+		control3d.oninput = function(){
+			left.style.transform = "rotateZ("+control3d.value+"deg)";
+			right.style.transform = "rotateZ("+control3d.value+"deg)";
+		}
+
+
+	</script>
+	<script type="text/javascript">
+		makeBox();
+		function makeBox(){
+			var a = document.createElement("div");
+			a.id ="square";
+			a.className = "box";
+			var b = Math.random()*window.innerWidth;
+			var c = Math.random()*window.innerHeight;
+			a.style.left = b + "px";
+			a.style.top = c + "px";
+			a.onclick = function() {
+				a.parentNode.removeChild(a); 
+				makeBox();
+			}
+			document.body.appendChild(a);
+		}
+	</script>
+</body>
+</html>
